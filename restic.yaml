@@ -1,12 +1,13 @@
 apiVersion: stash.appscode.com/v1alpha1
 kind: Restic
 metadata:
-  name: stash-demo
+  name: myweb-demo
   namespace: default
 spec:
   selector:
     matchLabels:
-      app: stash-demo
+    app: myweb
+    release: demo
   fileGroups:
   - path: /source/data
     retentionPolicyName: 'keep-last-5'
@@ -15,7 +16,7 @@ spec:
       mountPath: /safe/data
       hostPath:
         path: /data/stash-test/restic-repo
-    storageSecretName: stash-demo
+    storageSecretName: myweb-demo
   schedule: '@every 1m'
   volumeMounts:
   - mountPath: /source/data
