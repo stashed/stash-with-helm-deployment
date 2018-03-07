@@ -44,10 +44,6 @@ The following tables lists the configurable parameters of the myweb chart and th
 | `myweb.image`             | myweb container image                                         | `appscode/myweb` |
 | `myweb.tag`               | myweb container image tag                                     | `0.7.2`          |
 | `imagePullSecrets`        | Specify image pull secrets                                    | `nil` (does not add image pull secrets to deployed pods) |
-| `imagePullPolicy`         | Image pull policy                                             | `IfNotPresent`   |
-| `logLevel`                | Log level for proxy                                           | `3`              |
-| `nodeSelector`            | Node labels for pod assignment                                | `{}`             |
-| `rbac.create`             | If `true`, create and use RBAC resources                      | `true`           |
 | `serviceAccount.create`   | If `true`, create a new service account                       | `true`           |
 | `serviceAccount.name`     | Service account to be used. If not set and `serviceAccount.create` is `true`, a name is generated using the fullname template | `` |
 
@@ -63,25 +59,4 @@ installing the chart. For example:
 
 ```console
 $ helm install --name my-release --values values.yaml stable/myweb
-```
-
-## RBAC
-By default the chart will not install the recommended RBAC roles and rolebindings.
-
-You need to have the flag `--authorization-mode=RBAC` on the api server. See the following document for how to enable [RBAC](https://kubernetes.io/docs/admin/authorization/rbac/).
-
-To determine if your cluster supports RBAC, run the the following command:
-
-```console
-$ kubectl api-versions | grep rbac
-```
-
-If the output contains "beta", you may install the chart with RBAC enabled (see below).
-
-### Enable RBAC role/rolebinding creation
-
-To enable the creation of RBAC resources (On clusters with RBAC). Do the following:
-
-```console
-$ helm install --name my-release stable/myweb --set rbac.create=true
 ```
