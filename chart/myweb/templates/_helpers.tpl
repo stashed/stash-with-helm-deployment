@@ -2,7 +2,7 @@
 {{/*
 Expand the name of the chart.
 */}}
-{{- define "swift.name" -}}
+{{- define "myweb.name" -}}
 {{- default .Chart.Name .Values.nameOverride | trunc 63 | trimSuffix "-" -}}
 {{- end -}}
 
@@ -10,7 +10,7 @@ Expand the name of the chart.
 Create a default fully qualified app name.
 We truncate at 63 chars because some Kubernetes name fields are limited to this (by the DNS naming spec).
 */}}
-{{- define "swift.fullname" -}}
+{{- define "myweb.fullname" -}}
 {{- $name := default .Chart.Name .Values.nameOverride -}}
 {{- printf "%s-%s" $name .Release.Name | trunc 63 -}}
 {{- end -}}
@@ -18,9 +18,9 @@ We truncate at 63 chars because some Kubernetes name fields are limited to this 
 {{/*
 Create the name of the service account to use
 */}}
-{{- define "swift.serviceAccountName" -}}
+{{- define "myweb.serviceAccountName" -}}
 {{- if .Values.serviceAccount.create -}}
-    {{ default (include "swift.fullname" .) .Values.serviceAccount.name }}
+    {{ default (include "myweb.fullname" .) .Values.serviceAccount.name }}
 {{- else -}}
     {{ default "default" .Values.serviceAccount.name }}
 {{- end -}}

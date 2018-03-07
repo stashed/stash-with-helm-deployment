@@ -1,0 +1,12 @@
+apiVersion: v1
+description: 'myweb by AppsCode - Ajax friendly Helm Tiller Proxy'
+name: myweb
+version: 0.5.0
+appVersion: 0.7.2
+home: https://github.com/appscode/myweb
+icon: https://cdn.appscode.com/images/icon/myweb.png
+sources:
+  - https://github.com/appscode/myweb
+maintainers:
+  - name: appscode
+    email: support@appscode.com

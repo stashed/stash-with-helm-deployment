@@ -1,0 +1,32 @@
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: {{ template "myweb.fullname" . }}
+  labels:
+    chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
+    app: "{{ template "myweb.name" . }}"
+    heritage: "{{ .Release.Service }}"
+    release: "{{ .Release.Name }}"
+spec:
+  replicas: {{ .Values.replicaCount }}
+  template:
+    metadata:
+      labels:
+        app: "{{ template "myweb.name" . }}"
+        release: "{{ .Release.Name }}"
+    spec:
+      serviceAccountName: {{ template "myweb.serviceAccountName" . }}
+      containers:
+      - command:
+        - sleep
+        - "3600"
+        image: {{ .Values.myweb.image }}:{{ .Values.myweb.tag }}
+        imagePullPolicy: {{ .Values.imagePullPolicy }}
+        name: busybox
+        volumeMounts:
+        - mountPath: /source/data
+          name: source-data
+      volumes:
+      - gitRepo:
+          repository: https://github.com/appscode/stash-data.git
+        name: source-data
